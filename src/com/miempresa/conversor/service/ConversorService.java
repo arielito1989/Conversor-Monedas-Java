@@ -9,7 +9,19 @@ import java.util.Map;
 public class ConversorService {
 
     // 🔐 Reemplazá con tu clave real de la API
-    private static final String API_KEY = "d05d675495a0270ef4380928";
+    private static final String API_KEY = cargarApiKey();
+
+    private static String cargarApiKey() {
+        try {
+            Properties props = new Properties();
+            InputStream input = new FileInputStream("config.properties");
+            props.load(input);
+            return props.getProperty("api_key");
+        } catch (Exception e) {
+            throw new RuntimeException("No se pudo cargar la API key: " + e.getMessage());
+        }
+    }
+
 
     /**
      * Convierte un monto desde una moneda a otra usando la API.
