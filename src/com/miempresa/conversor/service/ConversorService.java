@@ -1,4 +1,8 @@
 package com.miempresa.conversor.service;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Properties;
+
 
 import com.miempresa.conversor.util.HttpHelper;
 import org.json.JSONObject;
