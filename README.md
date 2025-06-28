@@ -64,3 +64,10 @@ Exportar conversiones a PDF o Excel
 -
 ¡Todo aporte es bienvenido! Si tenés ideas o querés mejorar algo, abrí un issue o enviá un pull request. 😄
 
+## 🎥 Demo en video
+
+Podés ver el funcionamiento del conversor en este video:
+
+▶️ [Ver demo.mp4](https://github.com/arielito1989/Conversor-Monedas-Java/blob/master/demo/demo.mp4?raw=true)
+
+
