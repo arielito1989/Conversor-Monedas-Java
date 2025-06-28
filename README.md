@@ -64,12 +64,14 @@ Exportar conversiones a PDF o Excel
 -
 ¡Todo aporte es bienvenido! Si tenés ideas o querés mejorar algo, abrí un issue o enviá un pull request. 😄
 
-## 🎥 Demo en video
 
-Podés ver el funcionamiento del conversor en este video:
+
+
 
 
 ## 🎥 Demo en video
 
 [![Ver el demo](https://github.com/arielito1989/Conversor-Monedas-Java/blob/master/img/captura-demo.jpg?raw=true)](https://github.com/arielito1989/Conversor-Monedas-Java/blob/master/demo/demo.mp4?raw=true)
+
+[![Ver el demo en YouTube](https://img.youtube.com/vi/cTqu56P9_UU/hqdefault.jpg)](https://www.youtube.com/watch?v=cTqu56P9_UU)
 
