@@ -1,7 +1,7 @@
 package com.miempresa.conversor.ui;
 
 import com.miempresa.conversor.service.ConversorService;
-
+import com.miempresa.conversor.util.MonedaInfo;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
@@ -12,12 +12,14 @@ public class ConversorGUI extends JFrame {
     private JComboBox<String> comboHacia;
     private JTextField montoField;
     private JLabel resultadoLabel;
+    private DefaultListModel<String> historialModel;
+    private JList<String> listaHistorial;
 
     private Map<String, Double> tasas;
 
     public ConversorGUI() {
         setTitle("Conversor de Monedas");
-        setSize(400, 300);
+        setSize(400, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Centra la ventana
 
@@ -27,13 +29,18 @@ public class ConversorGUI extends JFrame {
 
     private void inicializarComponentes() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(6, 1));
+        panel.setLayout(new GridLayout(8, 1));
 
         comboDesde = new JComboBox<>();
         comboHacia = new JComboBox<>();
         montoField = new JTextField();
         resultadoLabel = new JLabel("Resultado: ");
         JButton btnConvertir = new JButton("Convertir");
+
+        historialModel = new DefaultListModel<>();
+        listaHistorial = new JList<>(historialModel);
+        JScrollPane scrollHistorial = new JScrollPane(listaHistorial);
+        scrollHistorial.setPreferredSize(new Dimension(250, 100));
 
         panel.add(new JLabel("Moneda de origen:"));
         panel.add(comboDesde);
@@ -44,7 +51,8 @@ public class ConversorGUI extends JFrame {
         panel.add(btnConvertir);
         panel.add(resultadoLabel);
 
-        add(panel);
+        add(panel, BorderLayout.CENTER);
+        add(scrollHistorial, BorderLayout.SOUTH);
 
         btnConvertir.addActionListener(e -> convertir());
     }
@@ -58,8 +66,10 @@ public class ConversorGUI extends JFrame {
             comboHacia.removeAllItems();
 
             for (String moneda : tasas.keySet()) {
-                comboDesde.addItem(moneda);
-                comboHacia.addItem(moneda);
+                String descripcion = MonedaInfo.getDescripcion(moneda);
+                String textoCombo = moneda + " - " + descripcion;
+                comboDesde.addItem(textoCombo);
+                comboHacia.addItem(textoCombo);
             }
 
             comboDesde.setSelectedItem("USD");
@@ -72,8 +82,8 @@ public class ConversorGUI extends JFrame {
 
     private void convertir() {
         try {
-            String desde = comboDesde.getSelectedItem().toString();
-            String hacia = comboHacia.getSelectedItem().toString();
+            String desde = comboDesde.getSelectedItem().toString().split(" ")[0];
+            String hacia = comboHacia.getSelectedItem().toString().split(" ")[0];
             double monto = Double.parseDouble(montoField.getText());
 
             ConversorService service = new ConversorService();
@@ -81,9 +91,17 @@ public class ConversorGUI extends JFrame {
 
             resultadoLabel.setText(String.format("Resultado: %.2f %s", resultado, hacia));
 
+            // Agregar al historial (máximo 10 entradas)
+            String registro = String.format("%.2f %s → %.2f %s", monto, desde, resultado, hacia);
+            if (historialModel.size() >= 10) {
+                historialModel.remove(0);
+            }
+            historialModel.addElement(registro);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }
-
 }
