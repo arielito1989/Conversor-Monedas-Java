@@ -68,8 +68,8 @@ Exportar conversiones a PDF o Excel
 
 Podés ver el funcionamiento del conversor en este video:
 
+
 ## 🎥 Demo en video
 
-[![Ver el demo](https://github.com/arielito1989/Conversor-Monedas-Java/blob/master/img/captura-demo.png?raw=true)](https://github.com/arielito1989/Conversor-Monedas-Java/blob/master/demo/demo.mp4?raw=true)
-
+[![Ver el demo](https://github.com/arielito1989/Conversor-Monedas-Java/blob/master/img/captura-demo.jpg?raw=true)](https://github.com/arielito1989/Conversor-Monedas-Java/blob/master/demo/demo.mp4?raw=true)
 
